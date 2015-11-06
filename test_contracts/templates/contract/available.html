@@ -1,0 +1,50 @@
+{% extends "sidebar.html" %}
+{% block sidebar %}
+    {% include 'contract/nav/_menu.html' %}
+{% endblock %}
+{% from '_macro.html' import status, service_name, css_status, render_pagination %}
+{% block content %}
+    <h1>Available Contracts</h1>
+    <small>Click on a contract row to open it.</small>
+    {% if available_contracts.total %}
+        <table class="table table-hover shadow">
+            <thead>
+            <th>Service</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Estimated Time</th>
+            <th>Last Updated</th>
+            </thead>
+            {% for contract  in available_contracts.items %}
+                <tr class="{{ css_status(contract.status) }} clickable-row" data-href="{{ url_for('contract.detail', invoice=contract.invoice) }}">
+                    <td>{{ contract.services }}</td>
+                    <td>{{ contract.start_location }}</td>
+                    <td>{{ contract.end_location }}</td>
+                    <td>{{ moment(contract.time).fromTime(time) }}</td>
+{#                    <td>{{ moment(contract.time).format('MMMM Do YYYY, h:mm:ss a') }}</td>#}
+                    <td>{{ moment(contract.last_updated).fromTime(time) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        I can't find any ¯\_(ツ)_/¯
+    {% endif %}
+    {% if available_contracts.pages > 1 %}
+    <div class="text-center">
+        {{ render_pagination(available_contracts) }}
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+    {{ moment.include_moment() }}
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
+    </script>
+    {{ super() }}
+{% endblock %}

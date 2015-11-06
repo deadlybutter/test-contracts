@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Place Combat Order</h1>
+    <form id="order" method="POST" action="{{ url_for('contract.combat') }}" class="form-horizontal">
+        {{ order.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                {{ order.service.label }}
+                {{ order.service(class="form-control") }}<br>
+                {{ order.ship.label }}
+                {{ order.ship(class="form-control") }}<br>
+                {{ order.start_location.label }}
+                {{ order.start_location(class="form-control") }}<br>
+                {{ order.end_location.label }}
+                {{ order.end_location(class="form-control") }}
+            </div>
+            <div class="cold-md-5 text-center">
+                {{ order.time.label }}<br>
+                {{ order.time(class="form-control") }}<br><br>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                {{ order.scu.label }}
+                {{ order.scu(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-3">
+                {{ order.fuel.label }}
+                {{ order.fuel(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-3">
+                {{ order.passengers.label }}
+                {{ order.passengers(class="form-control", value="0") }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                {{ order.description.label }}
+                {{ order.description(class="form-control", rows="6") }}
+                {{ order.submit(class="btn btn-primary") }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script>
+        jQuery('#time').datetimepicker({
+            theme: 'dark',
+            format: 'Y-m-d H:i:s',
+            inline: true,
+            lang: 'en',
+            step: '15',
+            minDate: '0',
+            value: new Date(),
+            formatDate:'Y-m-d',
+            defaultTime: '19:00'
+        });
+
+        $( "#scu" ).spinner({
+            min: '0'
+        });
+        $( "#fuel" ).spinner({
+            min: '0'
+        });
+        $( "#passengers" ).spinner({
+            min: '0'
+        });
+        $("#start_location").autocomplete({
+            source: {{ zones|safe }}
+        });
+        $("#end_location").autocomplete({
+            source: {{ zones|safe }}
+        });
+    </script>
+    {{ super() }}
+{% endblock %}

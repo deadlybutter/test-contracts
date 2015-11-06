@@ -1,0 +1,11 @@
+from test_contracts.models import CrewRoles
+CrewRoles.create(name='Pilot', active=1)
+CrewRoles.create(name='Radar', active=1)
+CrewRoles.create(name='Weapons Console', active=1)
+CrewRoles.create(name='Gunner', active=1)
+CrewRoles.create(name='Engineer', active=1)
+CrewRoles.create(name='Navigation', active=1)
+CrewRoles.create(name='Communication', active=1)
+CrewRoles.create(name='Security', active=1)
+CrewRoles.create(name='Science', active=1)
+CrewRoles.create(name='Medical', active=1)

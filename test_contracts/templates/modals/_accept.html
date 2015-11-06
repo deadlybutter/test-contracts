@@ -1,0 +1,21 @@
+<!-- Cancel Contract -->
+<div class="modal fade" id="accept-contract" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Accept Contract?</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to accept this contract?
+            </div>
+            <div class="modal-footer">
+                <a href="{{ url_for('contract.accept', invoice=contract.invoice) }}" class="btn btn-default"
+                   role="button">Accept Contract</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cancel Contract -->

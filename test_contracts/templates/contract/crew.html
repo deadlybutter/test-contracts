@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Place Crew Order</h1>
+    <form id="order" method="POST" action="{{ url_for('contract.crew') }}" class="form-horizontal">
+        {{ order.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <h4>Need to crew multiple ships?<br>Please submit a separate contract per ship.</h4>
+                {{ order.ship.label }}
+                {{ order.ship(class="form-control") }}<br>
+                {{ order.start_location.label }}
+                {{ order.start_location(class="form-control") }}<br>
+                {{ order.end_location.label }}
+                {{ order.end_location(class="form-control") }}
+            </div>
+            <div class="cold-md-5 text-center">
+                {{ order.time.label }}<br>
+                {{ order.time(class="form-control") }}<br><br>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                {{ order.pilot.label }}
+                {{ order.pilot(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.radar.label }}
+                {{ order.radar(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.weapons.label }}
+                {{ order.weapons(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.gunner.label }}
+                {{ order.gunner(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.engineer.label }}
+                {{ order.engineer(class="form-control", value="0") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                {{ order.navigation.label }}
+                {{ order.navigation(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.communications.label }}
+                {{ order.communications(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.security.label }}
+                {{ order.security(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.science.label }}
+                {{ order.science(class="form-control", value="0") }}
+            </div>
+            <div class="col-md-2">
+                {{ order.medical.label }}
+                {{ order.medical(class="form-control", value="0") }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                {{ order.description.label }}
+                {{ order.description(class="form-control", rows="6") }}
+                {{ order.submit(class="btn btn-primary") }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script>
+        jQuery('#time').datetimepicker({
+            theme: 'dark',
+            format: 'Y-m-d H:i:s',
+            inline: true,
+            lang: 'en',
+            step: '15',
+            minDate: '0',
+            value: new Date(),
+            formatDate:'Y-m-d',
+            defaultTime: '19:00'
+        });
+
+        $( "#pilot" ).spinner({
+            min: '0'
+        });
+        $( "#radar" ).spinner({
+            min: '0'
+        });
+        $( "#weapons" ).spinner({
+            min: '0'
+        });
+        $( "#gunner" ).spinner({
+            min: '0'
+        });
+        $( "#engineer" ).spinner({
+            min: '0'
+        });
+        $( "#navigation" ).spinner({
+            min: '0'
+        });
+        $( "#communications" ).spinner({
+            min: '0'
+        });
+        $( "#security" ).spinner({
+            min: '0'
+        });
+        $( "#science" ).spinner({
+            min: '0'
+        });
+        $( "#medical" ).spinner({
+            min: '0'
+        });
+        $("#start_location").autocomplete({
+            source: {{ zones|safe }}
+        });
+        $("#end_location").autocomplete({
+            source: {{ zones|safe }}
+        });
+    </script>
+    {{ super() }}
+{% endblock %}

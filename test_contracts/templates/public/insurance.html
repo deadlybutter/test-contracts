@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Insurance Policy</h1>
+                {% if content.content %}
+                    {{ content.content|safe }}
+                {% else %}
+                    <p>Content forthcoming.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

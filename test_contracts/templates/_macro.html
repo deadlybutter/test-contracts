@@ -1,0 +1,75 @@
+{% macro status(value) %}
+    {% if value|int == 0 %}
+        DENIED
+    {% elif value|int == 1 %}
+        CANCELLED
+    {% elif value|int == 2 %}
+        COMPLETED
+    {% elif value|int == 3 %}
+        IN PROGRESS
+    {% elif value|int == 4 %}
+        ASSIGNED
+    {% elif value|int == 5 %}
+        PENDING
+    {% elif value|int == 6 %}
+        NEW
+    {% else %}
+        UNKNOWN
+    {% endif %}
+{% endmacro %}
+
+{% macro css_status(value) %}
+    {% if value|int == 0 %}
+        danger
+    {% elif value|int == 1 %}
+        warning
+    {% elif value|int == 2 %}
+        success
+    {% elif value|int == 3 %}
+        info
+    {% elif value|int == 4 %}
+        info
+    {% elif value|int == 5 %}
+        warning
+    {% elif value|int == 6 %}
+        info
+    {% else %}
+        danger
+    {% endif %}
+{% endmacro %}
+
+{% macro service_name(value, service_list) %}
+    {% for x in service_list %}
+        {% if value|int == x.id|int %}
+            {{ x.name }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_pagination(pagination, endpoint) %}
+    <nav>
+        <ul class="pagination">
+            {% if pagination.has_prev %}
+                <li><a href="{{ url_for(request.endpoint, page=pagination.prev_num) }}">Previous</a></li>
+            {% else %}
+                <li class="disabled"><a href="#">Previous</a></li>
+            {% endif %}
+            {%- for page in pagination.iter_pages() %}
+                {% if page %}
+                    {% if page != pagination.page %}
+                        <li><a href="{{ url_for(request.endpoint, page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#">{{ page }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {%- endfor %}
+            {% if pagination.has_next %}
+                <li><a href="{{ url_for(request.endpoint, page=pagination.next_num) }}">Next</a></li>
+            {% else %}
+                <li class="disabled"><a href="#">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endmacro %}

@@ -1,0 +1,21 @@
+<li><a href="{{ url_for('public.overview') }}">Overview</a></li>
+<li><a href="{{ url_for('public.settings') }}">Account</a></li>
+<li><a href="{{ url_for('contract.available') }}">Contracts</a></li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+       aria-expanded="false">Policies <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ url_for('public.tos') }}">Terms of Service</a></li>
+        <li><a href="{{ url_for('public.insurance') }}">Insurance</a></li>
+        <li><a href="{{ url_for('public.privacy') }}">Privacy </a></li>
+    </ul>
+</li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+       aria-expanded="false">Help <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ url_for('help.faq') }}">FAQ</a></li>
+        <li><a href="#"><strike>Create Ticket</strike></a></li>
+        <li><a href="#"><strike>View Ticket</strike></a></li>
+    </ul>
+</li>

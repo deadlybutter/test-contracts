@@ -1,0 +1,37 @@
+{% extends "sidebar.html" %}
+{% block sidebar %}
+    {% include 'message/nav/_menu.html' %}
+{% endblock %}
+{% block content %}
+    <div class="body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Inbox</h1><br>
+
+                <form id="_embedded" method="POST" action="{{ url_for('message.new') }}" class="form-horizontal">
+                    {{ _embedded.hidden_tag() }}
+                    {{ _embedded.recipient.label }}
+                    {{ _embedded.recipient(class="form-control") }}<br>
+                    {{ _embedded.subject.label }}
+                    {{ _embedded.subject(class="form-control") }}<br>
+                    {{ _embedded.body.label }}
+                    {{ _embedded.body(class="form-control") }}<br>
+                    {{ _embedded.submit(class="btn btn-default") }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ moment.include_moment() }}
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+    {{ super() }}
+{% endblock %}

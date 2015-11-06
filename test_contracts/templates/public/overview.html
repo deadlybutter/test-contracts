@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block banner %}{% include '_banner.html' %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/FeedEk.css') }}">
+{% endblock %}
+{% block content %}
+    <h1>Overview</h1>
+    <div class="row">
+        <div class="col-md-4">Stuff.</div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel panel-default shadow">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a href="https://testsquadron.com/">Test Squadron Recent Threads</a></h3>
+                </div>
+                <div class="panel-body" id="test">
+                </div>
+            </div>
+            <div class="panel panel-default shadow">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a href="https://imperialnews.network/">Imperial News Network</a></h3>
+                </div>
+                <div class="panel-body" id="imperialnews"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/FeedEk.js') }}"></script>
+    <script>
+        $('#imperialnews').FeedEk({
+            FeedUrl: 'http://imperialnews.network/category/blog/feed/',
+            MaxCount: 5,
+            ShowDesc: false
+        });
+        $('#test').FeedEk({
+            FeedUrl: 'https://testsquadron.com/forums/-/index.rss',
+            MaxCount: 5,
+            ShowDesc: false
+        })
+    </script>
+
+    {{ super() }}
+{% endblock %}

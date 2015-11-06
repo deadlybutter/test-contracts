@@ -1,0 +1,264 @@
+{% extends "layout.html" %}
+{% block banner %}{% include '_banner.html' %}{% endblock %}
+{% from '_macro.html' import status as _status, css_status %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}">
+{% endblock %}
+{% block content %}
+    {% include 'modals/_message.html' %}
+    {% include 'modals/_accept.html' %}
+    {% include 'modals/_cancel.html' %}
+    {% include 'modals/_time.html' %}
+    {% include 'modals/_note.html' %}
+    <h1>Contract Details</h1><br>
+    <button class="form-control btn-success" onclick="goBack()">GO BACK</button><br><br>
+    <div class="row">
+        <div class="col-md-2"><br><br><br>
+            {% if contract.user_id == current_user.id %}
+                {# Owner:  Options to control the contract. #}
+                {% include 'contract/nav/_owner.html' %}
+            {% elif contract.assigned_to == current_user.id %}
+                {# Assigned Contractor:  Once assigned they can do stuff. #}
+                {% include 'contract/nav/_assigned.html' %}
+            {% else %}
+                {# Unassigned:  For Potential contractors #}
+                {% include 'contract/nav/_unassigned.html' %}
+            {% endif %}
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default shadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Contract Info</h3>
+                        </div>
+                        <div class="panel-body">
+                            <strong>Status:</strong> {{ _status(contract.status) }}<br>
+                            <strong>Type: </strong> {{ contract.services }}<br>
+                            <strong>Contract Owner:</strong>
+                            {% if current_user != contract.user %}
+                                <a data-toggle="modal" data-target="#new-message"
+                                   data-to="{{ contract.user }}"
+                                   id="user">@{{ contract.user }}</a>
+                            {% else %}
+                                <a href="#" id="self">@{{ contract.user }}</a>
+                            {% endif %}
+                            {% if contract.assigned and contract.user_id == current_user.id or contract.assigned_to == current_user.id %}
+                                <br><strong>Assigned To:</strong>
+                                {% if current_user != contract.assigned %}
+                                    <a data-toggle="modal" data-target="#new-message" data-to="{{ contract.assigned }}"
+                                       id="user">@{{ contract.assigned }}</a>
+                                {% else %}
+                                    <a href="#" id="self">@{{ contract.assigned }}</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel panel-default shadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Location</h3>
+                        </div>
+                        <div class="panel-body">
+                            <strong>Start Location:</strong> {{ contract.start_location }}<br>
+                            <strong>End Location:</strong> {{ contract.end_location }}
+                        </div>
+                    </div>
+                    <div class="panel panel-default shadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ship</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ contract.ship }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {% if contract.user_id == current_user.id or contract.assigned_to == current_user.id %}
+                        <div class="panel panel-default shadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Reference</h3>
+                            </div>
+                            <div class="panel-body">
+                                <strong>Contract Reference Code:</strong> {{ contract.invoice }}<br>
+                                <strong>Code Word:</strong> {{ contract.code }}<br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="panel panel-default shadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Time</h3>
+                        </div>
+                        <div class="panel-body">
+                            <strong>Last Updated:</strong> {{ moment(contract.last_updated).fromTime(time) }}<br>
+                            <strong>Created
+                                On:</strong> {{ moment(contract.created_on).format('MMMM Do YYYY, h:mm a') }}<br>
+                            <strong>Approximate
+                                Time:</strong> {{ moment(contract.time, local=True).format('MMMM Do YYYY, h:mm a') }}
+                        </div>
+                    </div>
+                    {% if contract.service_id != 1 %}
+                        <div class="panel panel-default shadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Transport</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if current_user == contract.assigned or current_user == contract.user %}
+                                    <strong>Cargo:</strong> {{ contract.scu }}<br>
+                                    <strong>Fuel:</strong> {{ contract.fuel }}<br>
+                                    <strong>Passengers:</strong> {{ contract.passengers }}<br>
+                                {% else %}
+                                    {% if contract.scu %}<strong>Cargo:</strong> Yes<br>{% endif %}
+                                    {% if contract.fuel %}<strong>Fuel:</strong> Yes<br>{% endif %}
+                                    {% if contract.passengers %}<strong>Passengers:</strong> Yes{% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if contract.service_id == 1 %}
+                        <div class="panel panel-default shadow">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Crew Requested</h3>
+                            </div>
+                            <div class="panel-body">
+                                <strong>Pilot:</strong> {{ contract.pilot }}<br>
+                                <strong>Radar:</strong> {{ contract.radar }}<br>
+                                <strong>Weapons:</strong> {{ contract.weapons }}<br>
+                                <strong>Gunner:</strong> {{ contract.gunner }}<br>
+                                <strong>Engineer:</strong> {{ contract.engineer }}<br>
+                                <strong>Communications:</strong> {{ contract.communications }}<br>
+                                <strong>Security:</strong> {{ contract.security }}<br>
+                                <strong>Science:</strong> {{ contract.science }}<br>
+                                <strong>Medical:</strong> {{ contract.medical }}<br>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default shadow">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Description</h3>
+                </div>
+                <div class="panel-body">
+                    {{ contract.description }}<br>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if contract.user_id == current_user.id or contract.assigned_to == current_user.id %}
+        {% if contract.notes %}
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default shadow">
+                        <div class="panel-heading">Notes</div>
+                        <ul class="list-group">
+                            {% for item in contract.notes|sort(reverse=False, attribute='time') %}
+                                {% if current_user.id == contract.user_id and item.client_flag == True %}
+                                    <li class="list-group-item">{{ item.note }}<br>
+                                        <strong>
+                                            {% if current_user != item.user %}
+                                                <a data-toggle="modal"
+                                                   data-target="#new-message"
+                                                   data-to="{{ item.user }}"
+                                                   id="user">@{{ item.user }}</a>
+                                            {% else %}
+                                                <a href="#" id="self">@{{ item.user }}</a>
+                                            {% endif %}
+                                        </strong>
+                                        <small>{{ moment(item.time).format('MMMM Do YYYY, h:mm:ss a') }}</small>
+                                    </li>
+                                {% elif current_user.id == contract.assigned_to and item.contractor_flag == True %}
+                                    <li class="list-group-item">{{ item.note }}<br>
+                                        <strong>
+                                            {% if current_user != item.user %}
+                                                <a data-toggle="modal"
+                                                   data-target="#new-message"
+                                                   data-to="{{ item.user }}"
+                                                   id="user">@{{ item.user }}</a>
+                                            {% else %}
+                                                <a href="#" id="self">@{{ item.user }}</a>
+                                            {% endif %}
+                                        </strong>
+                                        <small>{{ moment(item.time).format('MMMM Do YYYY, h:mm:ss a') }}</small>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div><br>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover shadow">
+                    <thead>
+                    <th>Time</th>
+                    <th>User</th>
+                    <th>Event</th>
+                    </thead>
+                    {% for item in contract.events|sort(True, attribute='time') %}
+                        <tr>
+                            <td>{{ moment(item.time).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+                            <td>
+                                {% if current_user != item.user %}
+                                    <a data-toggle="modal" data-target="#new-message" data-to="{{ item.user }}"
+                                       id="user">@{{ item.user }}</a>
+                                {% else %}
+                                    <a href="#" id="self">@{{ item.user }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ item.event }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% else %}
+    {% endif %}
+    <button class="form-control btn-success" onclick="goBack()">GO BACK</button>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    {{ moment.include_moment() }}
+
+    <script>
+        $(document).ready(function () {
+            jQuery('#time').datetimepicker({
+                theme: 'dark',
+                format: 'YYYY-MM-DD HH:mm:ss',
+                formatTime: 'h:mm a',
+                formatDate: 'DD.MM.YYYY',
+                inline: true,
+                lang: 'en',
+                step: 15,
+                minDate: '0'
+            });
+        });
+        function goBack() {
+            window.history.back();
+        }
+
+        Date.parseDate = function (input, format) {
+            return moment(input, format).toDate();
+        };
+        Date.prototype.dateFormat = function (format) {
+            return moment(this).format(format);
+        };
+        $('#new-message').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var to = button.data('to');
+            var subject = button.data('subject');
+            var modal = $(this);
+            modal.find('.modal-title').text('Message to @' + to);
+            modal.find('.modal-body #recipient').val(to);
+            modal.find('.modal-body #subject').val(subject);
+        })
+    </script>
+    {{ super() }}
+{% endblock %}

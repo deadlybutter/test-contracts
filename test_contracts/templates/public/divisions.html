@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="body-content">
+    <div class="row">
+        <h1>Careers</h1>
+
+        {% for group in divisions %}
+                {% if group.active %}
+                    <div class="panel panel-primary shadow">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>{{ group }}</strong><a href="#" class="pull-right"><i class="fa fa-envelope"></i> <strong>APPLY NOW</strong></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ group.description }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

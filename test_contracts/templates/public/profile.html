@@ -1,0 +1,49 @@
+{% extends "sidebar.html" %}
+{% block sidebar %}
+    {% include 'public/nav/_menu.html' %}
+{% endblock %}
+{% block content %}
+    <form method="POST" action="" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1>Welcome <strong>{{ current_user.username }}</strong></h1>
+                    <img src="{{ current_user.gravatar() }}" alt="{{ current_user.username }}'s Avatar" height="200"
+                         width="200" class="img-rounded"><br>
+                    [ <a href="https://en.gravatar.com/emails/" alt="Gravatar">CHANGE AVATAR</a> ]
+                </div>
+            </div>
+            <div class="col-md-8">
+                <br><br><br><br>
+
+                <div class="form-group">
+                    <label>Contact Info</label><br>
+                    {{ form.email(class="form-control", type="email", placeholder="Email") }}<br>
+
+                    {{ form.handle(class="form-control pull-right", placeholder="RSI Handle") }}
+                    {{ form.organization(class="form-control", placeholder="Organization Name") }}
+                    {{ form.spectrum(class="form-control", placeholder="Organizations RSI Spectrum") }}
+                    {{ form.website(class="form-control", type="url", placeholder="Organization Website") }}<br>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Job Interests</label> -
+                            <small>Hold <kbd>CTRL</kbd> to select multiple.</small>
+                            {{ form.interests(class="form-control") }}
+                        </div>
+                        <div class="col-md-6">
+                            <label>Crew Role Interests</label> -
+                            <small>Hold <kbd>CTRL</kbd> to select multiple.</small>
+                            {{ form.crewroles(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            {{ form.submit(class="btn btn-default") }}
+        </div>
+    </form>
+{% endblock %}
+

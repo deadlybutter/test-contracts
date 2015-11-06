@@ -1,0 +1,25 @@
+<li>
+    <a href="{{ url_for('message.new') }}" data-toggle="tooltip" data-placement="right" title="New"><span
+            class="fa-stack fa-lg sub_icon"><i
+            class="fa fa-plus fa-stack-1x"></i></span>New</a>
+</li>
+<li>
+    <a href="{{ url_for('message.inbox') }}" data-toggle="tooltip" data-placement="right" title="Inbox"><span
+            class="fa-stack fa-lg sub_icon"><i
+            class="fa fa-inbox fa-stack-1x"></i></span>Inbox</a>
+</li>
+<li>
+    <a href="{{ url_for('message.sent') }}" data-toggle="tooltip" data-placement="right" title="Sent"> <span
+            class="fa-stack fa-lg sub_icon"><i
+            class="fa fa-paper-plane fa-stack-1x "></i></span>Sent</a>
+</li>
+{#<li>#}
+{#    <a href="{{ url_for('message.draft') }}" data-toggle="tooltip" data-placement="right" title="Draft"><span#}
+{#            class="fa-stack fa-lg sub_icon"><i#}
+{#            class="fa fa-floppy-o fa-stack-1x "></i></span>Draft</a>#}
+{#</li>#}
+<li>
+    <a href="{{ url_for('message.trash') }}" data-toggle="tooltip" data-placement="right" title="Trash"><span
+            class="fa-stack fa-lg sub_icon"><i
+            class="fa fa-trash fa-stack-1x "></i></span>Trash</a>
+</li>

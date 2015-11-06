@@ -1,0 +1,52 @@
+{% extends "sidebar.html" %}
+{% block sidebar %}
+    {% include 'contract/nav/_menu.html' %}
+{% endblock %}
+{% block content %}
+    <h1>Place Order</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="{{ url_for('contract.support') }}"><img src="holder.js/300x200" alt="Placeholder"></a>
+
+                <div class="caption text-center">
+                    <h3><a href="{{ url_for('contract.support') }}">Support Contract</a></h3>
+
+                    <p>TODO: Add picture of support role based ships, cut out, transparent background, maybe a fancy
+                        shadow
+                        under them.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="{{ url_for('contract.crew') }}"><img src="holder.js/300x200" alt="Placeholder"></a>
+
+                <div class="caption text-center">
+                    <h3><a href="{{ url_for('contract.crew') }}">Crew Contract</a></h3>
+
+                    <p>TODO: Add picture of cutout crew in colorful support vests, transparent background. <a
+                            href="http://i.imgur.com/FmkfUtQ.jpg">Example</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="{{ url_for('contract.combat') }}"><img src="holder.js/300x200" alt="Placeholder"></a>
+
+                <div class="caption text-center">
+                    <h3><a href="{{ url_for('contract.combat') }}">Combat Contract</a></h3>
+
+                    <p>TODO: Add picture of armored character with weapon at ready cut out and a combat based aircraft
+                        also
+                        cutout and transparent, transparent.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/holder.min.js') }}"></script>
+    {{ super() }}
+{% endblock %}

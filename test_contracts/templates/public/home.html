@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron shadow">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="center-block"
+             alt="Responsive image">
+
+        <div class="text-center" id="slogan">CONTRACTS</div>
+        <div class="text-center" id="sub-slogan"><em>by</em> TEST</div>
+        <br><br>
+
+        <p>Offering you a wide variety of services directly and through authorized contractors.</p>
+
+        <p><a href="{{ url_for('public.services') }}" class="btn btn-default btn-large">Learn more &raquo;</a></p>
+    </div><!-- /.jumbotron -->
+
+    <div class="body-content">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2><i class="fa fa-space-shuttle"></i> Divisions</h2>
+
+                <p>Tired of trouble every time you're solo? The best ship is friendship! Connect with others and have
+                    your six covered!</p>
+
+                <p><a class="btn btn-default" href="{{ url_for('public.divisions') }}">Learn More &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><i class="fa fa-rocket"></i> About Us</h2>
+
+                <p>Your business is as important to us as it is to you, so why would you trust your business to us
+                    without knowing our history?</p>
+
+                <p><a class="btn btn-default" href="{{ url_for('public.about') }}">Learn More &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><i class="fa fa-truck"></i> Contact Us</h2>
+
+                <p>Have some questions that weren't answered on the website? Have a business offer for us?</p>
+
+                <p><a class="btn btn-default" href="{{ url_for('public.contact') }}">Learn More &raquo;</a></p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+{% endblock %}
+

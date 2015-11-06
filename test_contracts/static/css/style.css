@@ -1,0 +1,226 @@
+/* universal */
+
+html {
+    overflow-y: scroll;
+}
+
+#banner {
+    font-family: 'Expletus Sans';
+    color: #000;
+    background-color: #f1c40f;
+    font-size: 1.3em;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+}
+
+section {
+    overflow: auto;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.container-narrow {
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.badge {
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #3399f3;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-left: -1px;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: #999999;
+    background-color: #ffffff;
+    border-color: #dddddd;
+    cursor: not-allowed;
+}
+
+/* Forms */
+
+.navbar-form input[type="text"],
+.navbar-form input[type="password"] {
+    width: 180px;
+}
+
+.form-register {
+    width: 50%;
+}
+
+.form-register .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* footer */
+
+footer {
+    font-family: 'Expletus Sans';
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #999999;
+}
+
+footer a {
+    color: #f1c40f;
+}
+
+footer p {
+    color: #f1c40f;
+    float: right;
+    margin-right: 25px;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li {
+    float: left;
+    margin-left: 10px;
+}
+
+footer .company {
+    color: #f1c40f;
+    float: left;
+    margin-left: 25px;
+}
+
+footer .footer-nav {
+    float: right;
+    margin-right: 25px;
+    list-style: none;
+}
+
+/* Bootstrap override */
+
+input[type="text"], input[type='url'], input[type='email'], input[type="password"] {
+    color: #f1c40f;
+    background-color: #222;
+}
+
+#description, #ship, #service, #body {
+    color: #f1c40f;
+    background-color: #222;
+}
+
+select, select[multiple] {
+    color: #f1c40f;
+    background-color: #222;
+}
+
+#slogan {
+    font-family: 'Expletus Sans';
+    font-size: 52px;
+    color: #f1c40f;
+    text-shadow: 2px 1px #666;
+}
+
+#sub-slogan {
+    font-family: 'Expletus Sans';
+    font-size: 24px;
+    color: #f1c40f;
+    text-shadow: 2px 1px #666;
+}
+
+#user {
+    color: #f1c40f;
+    /*background-color: #62c462;*/
+    font-weight: bold;
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: none;
+}
+
+#self {
+    color: forestgreen;
+    font-weight: bold;
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: none;
+}
+
+/* Note Toggle Button */
+
+.private {
+    color: #fff;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 4px;
+}
+
+.badgebox {
+    opacity: 0;
+}
+
+.badgebox + .badge {
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+
+.badgebox:focus + .badge {
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
+}
+
+.message {
+    width: 80%;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    color: #f1c40f;
+    background-color: #4B4B4B;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 5px 5px 5px black;
+    -webkit-box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px black;
+}
+
+.shadow {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 5px 5px 5px black;
+    -webkit-box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px black;
+}

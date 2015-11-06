@@ -1,0 +1,16 @@
+{% if message.draft %}
+    <a class="btn btn-default btn-xs" href="#"><i class="fa fa-paper-plane-o"> <strong>SEND</strong></i></a>
+    <a class="btn btn-default btn-xs" href="{{ url_for('message._trash', msg=message.id) }}"><i
+            class="fa fa-trash-o"></i> <strong>TRASH</strong></a>
+{% elif message.trash %}
+    <a class="btn btn-default btn-xs" href="{{ url_for('message._return', msg=message.id) }}"><i class="fa fa-folder-o">
+        <strong>RETURN</strong></i></a>
+    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#delete-message"><i
+            class="fa fa-trash-o"> <strong>DELETE</strong></i></button>
+{% else %}
+    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#new-message"
+            data-to="{{ message.sender }}" data-subject="Re: {{ message.subject }}"><i class="fa fa-reply"> <strong>REPLY</strong></i>
+    </button>
+    <a class="btn btn-default btn-xs" href="{{ url_for('message._trash', msg=message.id) }}"><i class="fa fa-trash-o">
+        <strong>TRASH</strong></i></a>
+{% endif %}

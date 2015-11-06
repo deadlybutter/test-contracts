@@ -1,0 +1,49 @@
+{% extends "sidebar.html" %}
+{% block sidebar %}
+    {% include 'message/nav/_menu.html' %}
+{% endblock %}
+{% block content %}
+    <div class="body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Message</h1><br><br>
+
+                <div class="message">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <img src="{{ message.sender.gravatar() }}" alt="{{ message.sender }}'s Avatar"
+                                     height="100"
+                                     width="100" class="img-rounded"><br>
+                                {{ message.sender }}<br>
+                                {{ moment(message.sent_at).format('LL LTS') }}
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <h4><strong>{{ message.subject }}</strong></h4>
+                            </div>
+                            <div class="row">
+                                {{ message.body }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ moment.include_moment() }}
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+    {{ super() }}
+{% endblock %}
