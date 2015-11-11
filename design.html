@@ -9,58 +9,117 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-      
+
       <style>
-      
+
+          ::-webkit-scrollbar {
+            height: 10px;
+            border: 1px solid #FFF;
+            border-style: dashed hidden;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            /*border: 3px solid #ffcc00;*/
+            /*background-color: #FFF;*/
+            border: 2px solid #FFF;
+            background-color: transparent;
+            border-radius: 10px;
+          }
+
+          ::-webkit-scrollbar-thumb:hover {
+            border: 2px solid #ffcc00;
+          }
+
+          ::-webkit-scrollbar-thumb:active {
+            background-color: #ffcc00;
+          }
+
+          body {
+            color: #FFFFFF;
+          }
+
+          .background-img {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: auto;
+            z-index: -10;
+
+            -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+            -o-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+          }
+
+          .background-color {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -9;
+
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAH0lEQVQYV2NkIBIwEqmOgViF/0ekQpTg+Y8jTMEhAwB8NAcFklrOjwAAAABJRU5ErkJggg==) repeat;
+            opacity: 0.2;
+          }
+
           .nav {
               padding-top: 10px;
           }
-          
+
           .nav button {
               width: 80px;
           }
-          
+
           .filters .divisions, .systems {
               white-space: nowrap;
               overflow: scroll;
+              overflow-y: hidden;
               margin-top: 40px;
           }
-          
-          .filters img, p {
+
+          .filters img, .filters p {
               display: inline-block;
               padding-left: 10px;
               padding-right: 10px;
+              color: #ffcc00;
           }
-          
+
           .filters .options {
-              margin-top: 40px;   
+              margin-top: 40px;
           }
-          
+
           .filters .options h4, .input-group {
           }
-          
+
           .contracts {
               margin-top: 40px;
           }
-          
+
           .contracts .row {
-              text-align: center;          
+              text-align: center;
+              margin-left: 0;
+              margin-right: 0;
           }
-          
+
           .contract {
               border: 1px solid;
               display: inline-block;
           }
-          
+
           .contract-row {
-              margin-top: 60px;                   
+              margin-top: 60px;
           }
-      
+
       </style>
-      
+
   </head>
   <body>
     <div class="container-full">
+        <img src="http://i.imgur.com/5EwyDOw.jpg" class="background-img">
+        <div class="background-color"></div>
         <div class="container-full nav">
             <div class="col-md-1">
                 <button type="button" class="btn btn-default" aria-label="Home">
@@ -154,7 +213,7 @@
                 <p>Vendetta</p>
                 <p>Virgil</p>
                 <p>Vulture</p>
-                <p>Yulin</p>    
+                <p>Yulin</p>
             </div>
             <div class="row options">
                 <div class="col-md-3">
@@ -165,7 +224,7 @@
                           <li><input type="checkbox"> Medium risk</input></li>
                           <li><input type="checkbox"> Low risk</input></li>
                         </ul>
-                    </div>    
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h4>Civilizations</h4>
@@ -178,7 +237,7 @@
                           <li><input type="checkbox"> Tevarin</input></li>
                           <li><input type="checkbox"> Kr'Thak</input></li>
                         </ul>
-                    </div>    
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h4>Classification</h4>
@@ -188,7 +247,7 @@
                           <li><input type="checkbox"> Restricted</input></li>
                           <li><input type="checkbox"> Top Secret</input></li>
                         </ul>
-                    </div>    
+                    </div>
                 </div>
                <div class="col-md-3">
                     <h4>Roles</h4>
@@ -197,9 +256,9 @@
                           <li><input type="checkbox"> Pilot</input></li>
                           <li><input type="checkbox"> Gunner</input></li>
                           <li><input type="checkbox"> Soldier</input></li>
-                          <li><input type="checkbox"> More things</input></li>    
+                          <li><input type="checkbox"> More things</input></li>
                         </ul>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
@@ -240,7 +299,7 @@
                         </div>
                     </div>
                     <p>REDACTED->Terra</p>
-                </div>                
+                </div>
             </div>
             <div class="row contract-row">
                 <div class="col-md-3 contract">
@@ -278,12 +337,12 @@
                         </div>
                     </div>
                     <p>REDACTED->Terra</p>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
       <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   </body>
-</html> 
+</html>
